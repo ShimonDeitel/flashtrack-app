@@ -1,0 +1,75 @@
+name: Flashtrack
+options:
+  bundleIdPrefix: com.shimondeitel.flashtrack
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: "W7Q885Q59C"
+    CODE_SIGN_STYLE: Automatic
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+targets:
+  Flashtrack:
+    type: application
+    platform: iOS
+    sources:
+      - path: Flashtrack
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.flashtrack
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_FILE: Flashtrack/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: "YES"
+        GENERATE_INFOPLIST_FILE: "NO"
+  FlashtrackTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: FlashtrackTests
+      - path: Flashtrack.storekit
+    dependencies:
+      - target: Flashtrack
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.flashtrack.tests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+  FlashtrackUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: FlashtrackUITests
+    dependencies:
+      - target: Flashtrack
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.flashtrack.uitests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+schemes:
+  Flashtrack:
+    build:
+      targets:
+        Flashtrack: all
+        FlashtrackTests: [test]
+        FlashtrackUITests: [test]
+    run:
+      config: Debug
+      storeKitConfiguration: Flashtrack.storekit
+    test:
+      config: Debug
+      storeKitConfiguration: Flashtrack.storekit
+      targets:
+        - FlashtrackTests
+        - FlashtrackUITests
+    archive:
+      config: Release
